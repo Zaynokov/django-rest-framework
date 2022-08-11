@@ -21,4 +21,5 @@ class NoteModelSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         rep = super(NoteModelSerializer, self).to_representation(instance)
         rep['is_active'] = 'Active' if instance.is_active else 'Closed'
+        rep['project'] = instance.project.name
         return rep
