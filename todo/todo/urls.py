@@ -30,6 +30,8 @@ from userapp.views import UserModelViewSet, StaffUserListAPIView
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
+from graphene_django.views import GraphQLView
+
 schema_view = get_schema_view(
     openapi.Info(
         title='TODO',
@@ -55,5 +57,6 @@ urlpatterns = [
     path('api-jwt-auth/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api-jwt-auth/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/<str:version>/users/', StaffUserListAPIView.as_view()),
-    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui')
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('graphql/', GraphQLView.as_view(graphiql=True)),
 ]
